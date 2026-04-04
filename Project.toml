@@ -1,0 +1,13 @@
+name = "SingleDMRGLMG"
+uuid = "ed0b0844-eb83-4f5d-9d48-11e7e8a54e83"
+authors = ["mbao202 "]
+version = "0.1.0"
+
+[deps]
+CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
+ITensorMPS = "0d1a4710-d33b-49a5-8f18-73bdf49b47e2"
+ITensors = "9136182c-28ba-11e9-034c-db9fb085ebd5"
+
+[compat]
+ITensorMPS = "0.3.39"
+ITensors = "0.9.22"
