@@ -9,17 +9,17 @@ export run_dmrg_lmg_single
 #=
 Created by Maggie Bao 8/20/2025
     
-run_dmrg_lmg_single(N, ε, V, W;
+run_dmrg_lmg_single(N, ε, V, W=0.0;
                         nsweeps=5,
                         maxdim=[10,20,100,100,200],
                         cutoff=1e-10,
                         use_gpu=false)
 
-Solves the spin-1/2 LMG model with DMRG on a set of parameters and returns `(energy, elapsed_seconds)`.
+Solves the spin-1/2 LMG model(W=0) with DMRG on a set of parameters and returns `(energy, elapsed_seconds)`.
 Timing is DMRG-only, so the state/hamiltonian construction runtime is excluded.
 =#
 function run_dmrg_lmg_single(
-    N::Int, ε::Float64, V::Float64, W::Float64;
+    N::Int, ε::Float64, V::Float64, W::Float64=0.0;
     nsweeps::Int=5,
     maxdim::Vector{Int}=[10,20,100,100,200],
     cutoff::Float64=1e-10,
@@ -37,8 +37,6 @@ function run_dmrg_lmg_single(
     @inbounds for i in 1:N-1, j in i+1:N
         os += ( V/2, "X", i, "X", j)
         os -= ( V/2, "Y", i, "Y", j)
-        os += ( W/2, "X", i, "X", j)
-        os += ( W/2, "Y", i, "Y", j)
     end
     H = MPO(os, sites)
 
